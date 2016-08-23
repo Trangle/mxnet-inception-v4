@@ -1,10 +1,10 @@
 """
 
-Inception V4, suitable for images with around 299 x 299
+Inception V3, suitable for images with around 299 x 299
 
 Reference:
 
-Szegedy C, Ioffe S, Vanhoucke V. Inception-v4, inception-resnet and the impact of residual connections on learning[J]. arXiv preprint arXiv:1602.07261, 2016.
+Szegedy, Christian, et al. "Rethinking the Inception Architecture for Computer Vision." arXiv preprint arXiv:1512.00567 (2015).
 
 """
 
@@ -226,55 +226,55 @@ def get_symbol(num_classes=1000, scale=True):
                             896,
                             'in2b_1',
                             scaleResidual=scale)
-    in2b = InceptionResnetB(re3a,
+    in2b = InceptionResnetB(in2b,
                             128,
                             128, 128, 128,
                             896,
                             'in2b_2',
                             scaleResidual=scale)
-    in2b = InceptionResnetB(re3a,
+    in2b = InceptionResnetB(in2b,
                             128,
                             128, 128, 128,
                             896,
                             'in2b_3',
                             scaleResidual=scale)
-    in2b = InceptionResnetB(re3a,
+    in2b = InceptionResnetB(in2b,
                             128,
                             128, 128, 128,
                             896,
                             'in2b_4',
                             scaleResidual=scale)
-    in2b = InceptionResnetB(re3a,
+    in2b = InceptionResnetB(in2b,
                             128,
                             128, 128, 128,
                             896,
                             'in2b_5',
                             scaleResidual=scale)
-    in2b = InceptionResnetB(re3a,
+    in2b = InceptionResnetB(in2b,
                             128,
                             128, 128, 128,
                             896,
                             'in2b_6',
                             scaleResidual=scale)
-    in2b = InceptionResnetB(re3a,
+    in2b = InceptionResnetB(in2b,
                             128,
                             128, 128, 128,
                             896,
                             'in2b_7',
                             scaleResidual=scale)
-    in2b = InceptionResnetB(re3a,
+    in2b = InceptionResnetB(in2b,
                             128,
                             128, 128, 128,
                             896,
                             'in2b_8',
                             scaleResidual=scale)
-    in2b = InceptionResnetB(re3a,
+    in2b = InceptionResnetB(in2b,
                             128,
                             128, 128, 128,
                             896,
                             'in2b_9',
                             scaleResidual=scale)
-    in2b = InceptionResnetB(re3a,
+    in2b = InceptionResnetB(in2b,
                             128,
                             128, 128, 128,
                             896,

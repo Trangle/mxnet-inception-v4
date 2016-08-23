@@ -1,10 +1,10 @@
 """
 
-Inception V4, suitable for images with around 299 x 299
+Inception V3, suitable for images with around 299 x 299
 
 Reference:
 
-Szegedy C, Ioffe S, Vanhoucke V. Inception-v4, inception-resnet and the impact of residual connections on learning[J]. arXiv preprint arXiv:1602.07261, 2016.
+Szegedy, Christian, et al. "Rethinking the Inception Architecture for Computer Vision." arXiv preprint arXiv:1512.00567 (2015).
 
 """
 

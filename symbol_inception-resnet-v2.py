@@ -1,10 +1,10 @@
 """
 
-Inception V4, suitable for images with around 299 x 299
+Inception V3, suitable for images with around 299 x 299
 
 Reference:
 
-Szegedy C, Ioffe S, Vanhoucke V. Inception-v4, inception-resnet and the impact of residual connections on learning[J]. arXiv preprint arXiv:1602.07261, 2016.
+Szegedy, Christian, et al. "Rethinking the Inception Architecture for Computer Vision." arXiv preprint arXiv:1512.00567 (2015).
 
 """
 
@@ -159,20 +159,23 @@ def ReductionResnetV2A(data,
     return m
 
 def ReductionResnetV2B(data,
-                       num_2_1, num_2_2,
-                       num_3_1, num_3_2, num_3_3, num_3_4,
-                       name):
+                     num_2_1, num_2_2,
+                     num_3_1, num_3_2,
+                     num_4_1, num_4_2, num_4_3,
+                     name):
     rb1 = mx.sym.Pooling(data=data, kernel=(3, 3), stride=(2, 2), pool_type='max', name=('%s_%s_pool1' % ('max', name)))
 
     rb2 = Conv(data=data, num_filter=num_2_1, name=('%s_rb_2' % name), suffix='_conv_1')
     rb2 = Conv(data=rb2, num_filter=num_2_2, kernel=(3, 3), stride=(2, 2), name=('%s_rb_2' % name), suffix='_conv_2')
 
     rb3 = Conv(data=data, num_filter=num_3_1, name=('%s_rb_3' % name), suffix='_conv_1')
-    rb3 = Conv(data=rb3, num_filter=num_3_2, kernel=(7, 1), pad=(3, 0), name=('%s_rb_3' % name), suffix='_conv_2')
-    rb3 = Conv(data=rb3, num_filter=num_3_3, kernel=(1, 7), pad=(0, 3), name=('%s_rb_3' % name), suffix='_conv_3')
-    rb3 = Conv(data=rb3, num_filter=num_3_4, kernel=(3, 3), stride=(2, 2), name=('%s_rb_3' % name), suffix='_conv_4')
+    rb3 = Conv(data=rb3, num_filter=num_3_2, kernel=(3, 3), stride=(2, 2), name=('%s_rb_3' % name), suffix='_conv_2')
 
-    m = mx.sym.Concat(*[rb1, rb2, rb3], name=('%s_rb_concat1' % name))
+    rb4 = Conv(data=data, num_filter=num_4_1, name=('%s_rb_4' % name), suffix='_conv_1')
+    rb4 = Conv(data=rb4, num_filter=num_4_2, kernel=(3, 3), pad=(1, 1), name=('%s_rb_4' % name), suffix='_conv_2')
+    rb4 = Conv(data=rb4, num_filter=num_4_3, kernel=(3, 3), stride=(2, 2), name=('%s_rb_4' % name), suffix='_conv_3')
+
+    m = mx.sym.Concat(*[rb1, rb2, rb3, rb4], name=('%s_rb_concat1' % name))
     m = mx.sym.BatchNorm(data=m, name=('%s_rb_bn1' % name))
     # m = mx.sym.Activation(data=m, act_type='relu', name=('%s_rb_relu1' % name))
 
@@ -298,13 +301,14 @@ def get_symbol(num_classes=1000, scale=True):
                               'in2b_10',
                               scaleResidual=scale)
     # stage ReductionB
-    re3b = ReductionResnetV2B(in2b,
-                              192, 192,
-                              256, 256, 320, 320,
-                              're3b')
+    re4b = ReductionResnetV2B(in2b,
+                              256, 384,
+                              256, 288,
+                              256, 288, 320,
+                              're4b')
 
     # stage 5 x Inception Resnet C
-    in2c = InceptionResnetV2C(re3b,
+    in2c = InceptionResnetV2C(re4b,
                               192,
                               192, 224, 256,
                               2144,
