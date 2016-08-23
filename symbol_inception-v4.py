@@ -115,14 +115,14 @@ def InceptionC(data,
     c2 = Conv(data=data, num_filter=num_2_1, name=('%s_c_2' % name), suffix='_conv')
 
     c3 = Conv(data=data, num_filter=num_3_1, name=('%s_c_3' % name), suffix='_conv_1')
-    c3_1 = Conv(data=c3, num_filter=num_3_2, kernel=(3, 1), pad=(1, 0), name=('%s_c_3' % name), suffix='_conv_2')
-    c3_2 = Conv(data=c3, num_filter=num_3_3, kernel=(1, 3), pad=(0, 1), name=('%s_c_3' % name), suffix='_conv_3')
+    c3_1 = Conv(data=c3, num_filter=num_3_2, kernel=(3, 1), pad=(1, 0), name=('%s_c_3' % name), suffix='_conv_1_1')
+    c3_2 = Conv(data=c3, num_filter=num_3_3, kernel=(1, 3), pad=(0, 1), name=('%s_c_3' % name), suffix='_conv_1_2')
 
     c4 = Conv(data=data, num_filter=num_4_1, name=('%s_c_4' % name), suffix='_conv_1')
-    c4 = Conv(data=c4, num_filter=num_4_2, kernel=(3, 1), pad=(1, 0), name=('%s_c_4' % name), suffix='_conv_2')
-    c4 = Conv(data=c4, num_filter=num_4_3, kernel=(1, 3), pad=(0, 1), name=('%s_c_4' % name), suffix='_conv_3')
-    c4_1 = Conv(data=c4, num_filter=num_4_4, kernel=(3, 1), pad=(1, 0), name=('%s_c_4' % name), suffix='_conv_4')
-    c4_2 = Conv(data=c4, num_filter=num_4_5, kernel=(1, 3), pad=(0, 1), name=('%s_c_4' % name), suffix='_conv_5')
+    c4 = Conv(data=c4, num_filter=num_4_2, kernel=(1, 3), pad=(0, 1), name=('%s_c_4' % name), suffix='_conv_2')
+    c4 = Conv(data=c4, num_filter=num_4_3, kernel=(3, 1), pad=(1, 0), name=('%s_c_4' % name), suffix='_conv_3')
+    c4_1 = Conv(data=c4, num_filter=num_4_4, kernel=(3, 1), pad=(1, 0), name=('%s_c_4' % name), suffix='_conv_3_1')
+    c4_2 = Conv(data=c4, num_filter=num_4_5, kernel=(1, 3), pad=(0, 1), name=('%s_c_4' % name), suffix='_conv_3_2')
 
     m = mx.sym.Concat(*[c1, c2, c3_1, c3_2, c4_1, c4_2], name=('%s_c_concat1' % name))
     m = mx.sym.BatchNorm(data=m, name=('%s_c_bn1' % name))
@@ -270,19 +270,19 @@ def get_symbol(num_classes=1000):
                       256,
                       256,
                       384, 256, 256,
-                      384, 192, 224, 256, 256,
+                      384, 448, 512, 256, 256,
                       'in6c_1')
     in6c = InceptionC(in6c,
                       256,
                       256,
                       384, 256, 256,
-                      384, 192, 224, 256, 256,
+                      384, 448, 512, 256, 256,
                       'in6c_2')
     in6c = InceptionC(in6c,
                       256,
                       256,
                       384, 256, 256,
-                      384, 192, 224, 256, 256,
+                      384, 448, 512, 256, 256,
                       'in6c_3')
 
 
