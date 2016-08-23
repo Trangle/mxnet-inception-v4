@@ -311,32 +311,32 @@ def get_symbol(num_classes=1000, scale=True):
     in2c = InceptionResnetV2C(re4b,
                               192,
                               192, 224, 256,
-                              2144,
+                              2048,
                               'in2c_1',
                               scaleResidual=scale)
     in2c = InceptionResnetV2C(in2c,
                               192,
                               192, 224, 256,
-                              2144,
+                              2048,
                               'in2c_2',
                               scaleResidual=scale)
     in2c = InceptionResnetV2C(in2c,
                               192,
                               192, 224, 256,
-                              2144,
+                              2048,
                               'in2c_3',
                               scaleResidual=scale)
     in2c = InceptionResnetV2C(in2c,
                               192,
                               192, 224, 256,
-                              2144,
+                              2048,
                               'in2c_4',
                               scaleResidual=scale)
 
     in2c = InceptionResnetV2C(in2c,
                               192,
                               192, 224, 256,
-                              2144,
+                              2048,
                               'in2c_5',
                               scaleResidual=scale)
     # stage Average Pooling
